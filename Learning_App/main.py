@@ -1,3 +1,7 @@
-from View import *
+# from View import *
+#
+# View()
 
-View()
+from Controller import *
+
+Controller()
