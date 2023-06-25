@@ -1,5 +1,5 @@
 from Model import *
-from View import *
+from View1 import *
 
 class Controller:
     def __init__(self):
@@ -37,5 +37,9 @@ class Controller:
 
     def delete_task(self, task_id):
         self.model.delete_task(task_id)
+
+    def ask_save_changes_before_shut_down(self):
+        compare = self.model.ask_save_changes_before_shut_down()
+        return compare
 
 
