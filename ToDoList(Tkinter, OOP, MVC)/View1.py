@@ -14,7 +14,7 @@ class View:
         self.root.config(bg='black')
         self.label_font = ('Verdana', 10, 'normal')
         self.label_font_color = 'white'
-        self.button_font = ('Arial Narrow', 12, 'bold')
+        self.button_font = ('Calibri', 11, 'normal')
         self.button_font_color = '#009999'
         self.bg = 'black'
         self.pad_x = 10

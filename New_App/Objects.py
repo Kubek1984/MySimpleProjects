@@ -5,8 +5,7 @@ from enum import Enum
 
 class MainObject(ABC):
 
-    def __init__(self, subject, topic, name, text, date=None, class_type=None):
-        self.class_type = class_type
+    def __init__(self, subject, topic, name, text, date=None):
         self.subject = subject
         self.topic = topic
         self.name = name
@@ -34,12 +33,14 @@ class Lesson(MainObject):
     def __init__(self, subject, topic, name, text):
         super().__init__(subject, topic, name, text)
         self.items = []
+        self.class_type = 'lesson'
 
     class LessonItem(MainObject):
 
         def __init__(self, subject, topic, name, text, link=None):
             super().__init__(subject, topic, name, text)
             self.link = link
+            self.class_type = 'lesson_item'
 
     def add_item(self, item_subject, item_topic, item_name, item_text, item_links):
         item = self.LessonItem(item_subject, item_topic, item_name, item_text, item_links)
@@ -61,6 +62,7 @@ class FlashCard(MainObject):
     def __init__(self, subject, topic, name, text, read_once=None):
         super().__init__(subject, topic, name, text)
         self.read_once = read_once
+        self.class_type = 'flashcard'
         if self.read_once is None:
             self.read_once = 0
         if self.status == MainObject.Status.IN_PROGRESS:
@@ -75,7 +77,9 @@ class FlashCard(MainObject):
 
 
 class Task(MainObject):
-    pass
+    def __init__(self, subject, topic, name, text):
+        super().__init__(subject, topic, name, text)
+        self.class_type = 'task'
 
 
 obj = Lesson('tematPython', 'klasy i dziedziczenie', 'test1', 'dowolny text testowy')

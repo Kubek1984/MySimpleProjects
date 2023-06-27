@@ -22,7 +22,7 @@ class Task_object:
         else:
             return f'{self.name + (space_nr * " ")} \t {self.date} \tLow Priority'
 
-    class Priority(Enum):
-        HIGH = 'High'
-        MEDIUM = 'Medium'
-        LOW = 'Low'
+    # class Priority(Enum):
+    #     HIGH = 'High'
+    #     MEDIUM = 'Medium'
+    #     LOW = 'Low'
