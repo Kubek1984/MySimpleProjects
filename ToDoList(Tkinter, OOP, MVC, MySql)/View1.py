@@ -134,7 +134,9 @@ class View:
 
     def click_on_submit(self, name, text, priority):
         task_object = self.controller.make_object(name, text, priority)
-        self.controller.add_task(task_object)
+        self.controller.save_object_in_database(task_object)
+        self.controller.model.load_dictionary()
+        # self.controller.add_task(task_object)
         # self.controller.save_dictionary()
         self.click_on_main_menu()
 
@@ -155,12 +157,9 @@ class View:
 
     def click_on_delete_task(self):
         item = self.current_selection_from_list
-        index = None
-        for key, value in self.controller.model.task_object_dictionary.items():
-            if value == item:
-                index = key
 
-        self.controller.delete_task(index)
+
+        self.controller.delete_task(item.id)
         # self.controller.save_dictionary()
         self.click_on_main_menu()
 
@@ -181,7 +180,7 @@ class View:
 
     def click_on_save_changes(self):
         self.controller.save_dictionary()
-        print('Done')
+
 
     # ---------------Methods-------------------------#
 
@@ -190,12 +189,12 @@ class View:
             child.destroy()
 
     def selected_item_from_combobox(self, event):
-        if self.priority_combobox.get() == 'Priority.HIGH':
-            self.selected = Task_object.Priority.HIGH
-        elif self.priority_combobox.get() == 'Priority.MEDIUM':
-            self.selected = Task_object.Priority.MEDIUM
+        if self.priority_combobox.get() == 'High':
+            self.selected = 'High'
+        elif self.priority_combobox.get() == 'Medium':
+            self.selected = 'Medium'
         else:
-            self.selected = Task_object.Priority.LOW
+            self.selected = 'Low'
 
     def select_item_from_listbox(self, event):
 
@@ -210,6 +209,6 @@ class View:
         if task_object.name != name:
             self.controller.set_name_task(task_object, name)
         if task_object.text != text:
-            self.controller.set_new_text_task(task_object, text)
+            self.controller.set_text_task(task_object, text)
         if priority is not None and task_object.priority != priority:
             self.controller.set_priority_task(task_object, priority)
