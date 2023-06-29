@@ -3,7 +3,7 @@ from enum import Enum
 
 
 class Task_object:
-    def __init__(self, name, text, priority, date=None):
+    def __init__(self,name, text, priority, date=None, id=None):
         self.name = name
         self.text = text
         self.priority = priority
@@ -11,13 +11,15 @@ class Task_object:
         # self.notification = notification
         # self.state = state
         if self.date == None:
-            self.date = datetime.datetime.now().date()
+            date = datetime.datetime.now().date()
+            self.date = date.strftime('%Y-%m-%d')
+        self.id = id
 
     def __repr__(self):
         space_nr = 25 - len(self.name)
-        if self.priority == Task_object.Priority.HIGH:
+        if self.priority == 'High':
             return f'{self.name + (space_nr * " ")} \t {self.date} \tHigh Priority'
-        elif self.priority == Task_object.Priority.MEDIUM:
+        elif self.priority == 'Medium':
             return f'{self.name + (space_nr * " ")} \t {self.date} \tMedium Priority'
         else:
             return f'{self.name + (space_nr * " ")} \t {self.date} \tLow Priority'
